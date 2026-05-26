@@ -1,12 +1,12 @@
 from scripts.tile import Tile
 
 tiles = {
-    "air":{"color":(255,255,255), "solid":False},
-    "wall":{"color":(120,120,120), "solid":True}
+    "air":{"color":(0,0,0), "solid":False},
+    "wall":{"color":(60,60,60), "solid":True}
 }
 
 
-def format_grid(level: list[list[int]]) -> list[list[Tile]]:
+def format_grid(level: list[list[str]]) -> list[list[Tile]]:
     grid = []
     for i in range(len(level)):
         row = []

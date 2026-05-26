@@ -2,6 +2,9 @@ import pygame
 import sys
 
 from scripts.tile import Tile
+from scripts.grid_formatter import format_grid
+from scripts.draw import draw_grid
+from scripts.levels import level_1
 
 pygame.init()
 
@@ -14,11 +17,7 @@ a = Tile("wall", (1,1,1), False)
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
-grid = [
-[],
-]
-
-
+grid = format_grid(level_1)
 
 clock = pygame.time.Clock()
 
@@ -29,9 +28,8 @@ while True:
             pygame.quit()
             sys.exit()
     
-    
-    screen.fill((0, 0, 0))
-
+    draw_grid(screen, grid, TILE_SIZE)
     pygame.display.update()
+    
 
     clock.tick(60)
