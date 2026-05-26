@@ -1,10 +1,16 @@
 import pygame
 import sys
 
+from scripts.tile import Tile
+
 pygame.init()
 
-WIDTH = 720
-HEIGHT = 480
+WIDTH = 704  # 22 tiles
+HEIGHT = 480 # 15 tiles
+TILE_SIZE = 32
+
+
+a = Tile("wall", (1,1,1), False)
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
