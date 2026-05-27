@@ -9,5 +9,9 @@ class Entity:
         self.x += dx
         self.y += dy
         self.update_pos()
+    def set_pos(self, x, y):
+        self.x = x
+        self.y = y
+        self.update_pos()
     def update_pos(self):
         self.pos = (self.x, self.y)

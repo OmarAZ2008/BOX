@@ -6,7 +6,8 @@ tiles = {
     "wall":{"color":(60,60,60), "solid":True},
     "goal":{"color":(0,200,0), "solid":False},
     "button":{"color":(200,60,60), "solid":False},
-    "gate":{"color":(120,120,120), "solid":True}
+    "gate":{"color":(120,120,120), "solid":True},
+    "portal":{"color":(150,80,255), "solid":False}
 }
 
 entities = {
