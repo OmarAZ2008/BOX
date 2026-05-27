@@ -25,4 +25,7 @@ def draw_entity(screen, entity: Entity, TILE_SIZE: int):
         TILE_SIZE
     )
     pygame.draw.rect(screen, entity.color, rect)
-            
+
+def display_text(screen, text, font, color, x, y):
+    text_surface = font.render(text,True,color)
+    screen.blit(text_surface, (x, y))

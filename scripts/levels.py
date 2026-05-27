@@ -2,7 +2,7 @@ level_1 = [
 ["air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air"],
 ["air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air"],
 ["air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air"],
-["air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air"],
+["air","air","air","air","air","air","air","air","air","air","air","air","air","goal","air","air","air","air","air","air","air","air"],
 ["air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air"],
 ["air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air"],
 ["air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air","air"],

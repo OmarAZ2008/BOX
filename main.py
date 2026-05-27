@@ -4,8 +4,9 @@ import sys
 from scripts.tile import Tile
 from scripts.entities import Entity
 from scripts.grid_formatter import format_grid
-from scripts.draw import draw_grid, draw_entity
+from scripts.display import draw_grid, draw_entity, display_text
 from scripts.movement import can_move
+from scripts.locate import locate
 from scripts.levels import level_1
 
 pygame.init()
@@ -17,7 +18,11 @@ TILE_SIZE = 32
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
+font = pygame.font.SysFont(None, 36)
+
 grid = format_grid(level_1)
+
+goal = locate(grid, "goal")[0]
 
 start_x = 8
 start_y = 10
@@ -49,6 +54,11 @@ while True:
     
     draw_grid(screen, grid, TILE_SIZE)
     draw_entity(screen, player, TILE_SIZE)
+    if player.pos == goal:
+        text = "Congratulations! You Win"
+        display_text(screen, text, font, (255,255,255), 10, 10)
+        pygame.quit()
+        sys.exit()
     pygame.display.update()
     
 

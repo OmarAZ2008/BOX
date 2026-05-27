@@ -2,7 +2,8 @@ from scripts.tile import Tile
 
 tiles = {
     "air":{"color":(0,0,0), "solid":False},
-    "wall":{"color":(60,60,60), "solid":True}
+    "wall":{"color":(60,60,60), "solid":True},
+    "goal":{"color":(0,200,0), "solid":False}
 }
 
 
