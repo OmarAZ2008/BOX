@@ -1,5 +1,6 @@
 class Entity:
-    def __init__ (self, x: int, y: int, color: tuple):
+    def __init__ (self, entity_type, x: int, y: int, color: tuple):
+        self.entity_type = entity_type
         self.x = x
         self.y = y
         self.pos = (self.x, self.y)

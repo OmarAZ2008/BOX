@@ -3,11 +3,11 @@ import sys
 
 from scripts.tile import Tile
 from scripts.entities import Entity
-from scripts.grid_formatter import format_grid
+from scripts.formatter import format_level
 from scripts.display import draw_grid, draw_entities, display_text
 from scripts.movement import can_move, push
 from scripts.locate import locate_tiles, locate_entities
-from scripts.levels import level_1
+from scripts.levels import level_1_grid
 
 pygame.init()
 
@@ -20,20 +20,19 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 font = pygame.font.SysFont(None, 36)
 
-grid = format_grid(level_1)
+formatted_level = format_level(level_1_grid)
+grid = formatted_level["grid"]
 
 goal = locate_tiles(grid, "goal")[0]
 
-start_x = 8
-start_y = 10
-box_x = 12
-box_y = 8
-player_color = (0,120,255)
-box_color = (160,110,60)
-player = Entity(start_x, start_y, player_color)
-box = Entity(box_x, box_y, box_color)
-entities = [player, box, Entity(12,10,box_color)]
+entities = formatted_level["entities"]
 entity_positions = locate_entities(entities)
+
+player = Entity("player",0,0,(0,0,0))
+for i in range(len(entities)):
+    if entities[i].entity_type == "player":
+        player = entities[i]
+
 
 clock = pygame.time.Clock()
 
