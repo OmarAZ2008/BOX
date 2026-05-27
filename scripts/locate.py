@@ -1,6 +1,7 @@
 from scripts.tile import Tile
+from scripts.entities import Entity
 
-def locate(grid: list[list[Tile]], tile_type: str) -> list[tuple]:
+def locate_tiles(grid: list[list[Tile]], tile_type: str) -> list[tuple]:
     positions = []
 
     for i in range(len(grid)):
@@ -8,4 +9,10 @@ def locate(grid: list[list[Tile]], tile_type: str) -> list[tuple]:
             tile = grid[i][j]
             if tile.tile_type == tile_type:
                 positions.append((j,i))
+    return positions
+
+def locate_entities(entities: list[Entity]) -> list[tuple]:
+    positions = []
+    for entity in entities:
+        positions.append(entity.pos)
     return positions
