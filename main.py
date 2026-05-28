@@ -9,7 +9,7 @@ from scripts.display import draw_grid, draw_entities, display_text
 from scripts.movement import can_move, push, teleport
 from scripts.locate import locate_tiles, locate_entities
 from scripts.button_logic import update_gate_state
-from scripts.levels import level_grids
+from scripts.parser import parsed_levels
 
 pygame.init()
 
@@ -23,7 +23,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 font = pygame.font.SysFont(None, 36)
 
 levels = []
-for level in level_grids:
+for level in parsed_levels:
     levels.append(format_level(level))
 grids = []
 level_entities = []

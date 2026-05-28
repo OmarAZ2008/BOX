@@ -64,13 +64,14 @@ def parse_level(path):
 
     level = []
 
-    for j in range(len(lines)):
+    for i in range(len(lines)):
         row  = []
-        for i in range(len(lines[j])):
+        for j in range(len(lines[i])):
             char = lines[i][j]
             if char in symbols:
                 row.append(symbols[char])
         level.append(row)
+    return level
 
 parsed_levels = []
 for path in level_paths:
