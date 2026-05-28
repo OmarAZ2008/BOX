@@ -31,7 +31,7 @@ for level in levels:
     grids.append(level["grid"])
     level_entities.append(level["entities"])
 
-current_level = 0
+current_level = 5
 
 state = "game"
 
@@ -93,6 +93,10 @@ while True:
                         if entities[i].entity_type == "player":
                             player = entities[i]
                 entity_positions = locate_entities(entities)
+                goal = locate_tiles(grid, "goal")[0]
+                button_positions = locate_tiles(grid, "button")
+                gate_positions = locate_tiles(grid, "gate")
+                portal_positions = locate_tiles(grid, "portal")
                 update_gate_state(grid, button_positions, gate_positions, entity_positions)
 
 
@@ -110,6 +114,10 @@ while True:
                 if entities[i].entity_type == "player":
                     player = entities[i]
             entity_positions = locate_entities(entities)
+            goal = locate_tiles(grid, "goal")[0]
+            button_positions = locate_tiles(grid, "button")
+            gate_positions = locate_tiles(grid, "gate")
+            portal_positions = locate_tiles(grid, "portal")
             update_gate_state(grid, button_positions, gate_positions, entity_positions)
         display_text(screen, f"Level {current_level+1}", font, (255,255,255), 10, 10)
         pygame.display.update()

@@ -60,17 +60,17 @@ def can_push(grid, entity_positions, portal_positions, x, y, dx, dy):
             p1y = new_entity_y
             new_pos = get_portal_spawn_pos(grid, p1x, p1y, dx, dy, portal_positions)
             if (new_pos[0], new_pos[1]) in entity_positions:    
+                print("C")
                 pushed_entity_new_x = new_pos[0] + dx
                 pushed_entity_new_y = new_pos[1] + dy
+            else:
+                return True
 
         if (pushed_entity_new_x, pushed_entity_new_y) in entity_positions:
-            print("Entity in way")
             return False
         if out_of_bounds(grid, pushed_entity_new_x, pushed_entity_new_y):
-            print("out of bounds")
             return False
         if new_tile_solid(grid, pushed_entity_new_x, pushed_entity_new_y):
-            print("solid")
             return False
 
     return True
