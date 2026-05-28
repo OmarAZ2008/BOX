@@ -31,7 +31,7 @@ for level in levels:
     grids.append(level["grid"])
     level_entities.append(level["entities"])
 
-current_level = 5
+current_level = 0
 
 state = "game"
 
