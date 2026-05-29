@@ -1,6 +1,17 @@
+import pygame
+
 from scripts.entities import Entity
 from scripts.tile import Tile
 from scripts.locate import locate_entities
+
+pygame.init()
+pygame.mixer.init()
+
+teleport_sound = pygame.mixer.Sound("sounds/portal.ogg")
+
+def play_sound(sound, sfx: bool):
+    if sfx:
+        sound.play()
 
 def out_of_bounds(grid, new_x, new_y):
     rows = len(grid)
@@ -75,7 +86,7 @@ def can_push(grid, entity_positions, portal_positions, x, y, dx, dy):
 
     return True
 
-def push(grid, entities, entity_positions, portal_positions, x, y, dx, dy):
+def push(grid, entities, entity_positions, portal_positions, x, y, dx, dy, sfx):
     pos = (x + dx, y + dy)
     if pos in entity_positions:
         for i in range(len(entities)):
@@ -87,10 +98,12 @@ def push(grid, entities, entity_positions, portal_positions, x, y, dx, dy):
                     new_pos = get_portal_spawn_pos(grid, p1x, p1y, dx, dy, portal_positions)
                     new_x = new_pos[0]
                     new_y = new_pos[1]
+                    play_sound(teleport_sound, sfx)
                     entities[i].set_pos(new_x, new_y)
+
                 else:
                     entities[i].move(dx, dy)
-def teleport(grid, entities, entity, entity_positions, portal_positions, dx, dy):
+def teleport(grid, entities, entity, entity_positions, portal_positions, dx, dy, sfx):
     if entity.pos in portal_positions:  
         p1x = entity.x
         p1y = entity.y
@@ -101,6 +114,7 @@ def teleport(grid, entities, entity, entity_positions, portal_positions, dx, dy)
             for i in range(len(entities)):
                 if entities[i].pos == (new_x, new_y):
                     entities[i].move(dx,dy)
+        play_sound(teleport_sound, sfx)
         entity.set_pos(new_x, new_y)
         
 def get_portal_spawn_pos(grid, p1x, p1y, dx, dy, portal_positions):

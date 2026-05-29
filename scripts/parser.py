@@ -4,6 +4,11 @@ level_paths = [
     "levels/level_3.txt",
     "levels/level_4.txt",
     "levels/level_5.txt",
+    "levels/level_6.txt",
+    "levels/level_7.txt",
+    "levels/level_8.txt",
+    "levels/level_9.txt",
+    "levels/level_10.txt"
 ]
 
 # a-m: buttons n-z:portals

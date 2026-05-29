@@ -12,15 +12,25 @@ from scripts.button_logic import update_gate_state
 from scripts.parser import parsed_levels
 
 pygame.init()
+pygame.mixer.init()
+
+def play_sound(sound, sfx: bool):
+    if sfx:
+        sound.play()
 
 WIDTH = 736  # 23 tiles
 HEIGHT = 480 # 15 tiles
 TILE_SIZE = 32
 
+sfx = True
+bgm = True
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 font = pygame.font.SysFont(None, 36)
+
+move_sound = pygame.mixer.Sound("sounds/move.ogg")
+win_sound = pygame.mixer.Sound("sounds/win.ogg")
 
 levels = []
 for level in parsed_levels:
@@ -45,7 +55,7 @@ portal_positions = locate_tiles(grid, "portal")
 
 entity_positions = locate_entities(entities)
 if state == "game":
-    update_gate_state(grid, button_positions, gate_positions, entity_positions)
+    update_gate_state(grid, button_positions, gate_positions, entity_positions, sfx)
 
 player = Entity("player",0,0,(0,0,0))
 for i in range(len(entities)):
@@ -65,26 +75,30 @@ while True:
             if state == "game":
                 if event.key == pygame.K_UP or event.key == pygame.K_w:
                     if can_move(entities, player, portal_positions, grid, 0, -1):
-                        push(grid, entities, entity_positions, portal_positions, player.x, player.y, 0, -1)
+                        push(grid, entities, entity_positions, portal_positions, player.x, player.y, 0, -1, sfx)
                         player.move(0,-1)
-                        teleport(grid, entities, player, entity_positions, portal_positions, 0, -1)
+                        teleport(grid, entities, player, entity_positions, portal_positions, 0, -1, sfx)
+                        play_sound(move_sound, sfx)
                 elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
                     if can_move(entities, player, portal_positions, grid, 0, 1):
-                        push(grid, entities, entity_positions, portal_positions, player.x, player.y, 0, 1)
+                        push(grid, entities, entity_positions, portal_positions, player.x, player.y, 0, 1, sfx)
                         player.move(0,1)
-                        teleport(grid, entities, player, entity_positions, portal_positions, 0, 1)
+                        teleport(grid, entities, player, entity_positions, portal_positions, 0, 1, sfx)
+                        play_sound(move_sound, sfx)
                 elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
                     if can_move(entities, player, portal_positions, grid, -1, 0):
-                        push(grid, entities, entity_positions, portal_positions, player.x, player.y, -1, 0)
+                        push(grid, entities, entity_positions, portal_positions, player.x, player.y, -1, 0, sfx)
                         player.move(-1,0)
-                        teleport(grid, entities, player, entity_positions, portal_positions, -1, 0)
+                        teleport(grid, entities, player, entity_positions, portal_positions, -1, 0, sfx)
+                        play_sound(move_sound, sfx)
                 elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                     if can_move(entities, player, portal_positions, grid, 1, 0):
-                        push(grid, entities, entity_positions, portal_positions, player.x, player.y, 1, 0)
+                        push(grid, entities, entity_positions, portal_positions, player.x, player.y, 1, 0, sfx)
                         player.move(1,0)
-                        teleport(grid, entities, player, entity_positions, portal_positions, 1, 0)
+                        teleport(grid, entities, player, entity_positions, portal_positions, 1, 0, sfx)
+                        play_sound(move_sound, sfx)
                 entity_positions = locate_entities(entities)
-                update_gate_state(grid, button_positions, gate_positions, entity_positions)
+                update_gate_state(grid, button_positions, gate_positions, entity_positions, sfx)
                 if event.key == pygame.K_r:
                     grid = copy.deepcopy(grids[current_level])
                     entities = copy.deepcopy(level_entities[current_level])
@@ -97,13 +111,14 @@ while True:
                 button_positions = locate_tiles(grid, "button")
                 gate_positions = locate_tiles(grid, "gate")
                 portal_positions = locate_tiles(grid, "portal")
-                update_gate_state(grid, button_positions, gate_positions, entity_positions)
+                update_gate_state(grid, button_positions, gate_positions, entity_positions, sfx)
 
 
     if state == "game":
         draw_grid(screen, grid, TILE_SIZE)
         draw_entities(screen, entities, TILE_SIZE)
         if player.pos == goal:
+            play_sound(win_sound, sfx)
             current_level += 1
             if current_level >= len(levels):
                 current_level = 0
@@ -118,7 +133,7 @@ while True:
             button_positions = locate_tiles(grid, "button")
             gate_positions = locate_tiles(grid, "gate")
             portal_positions = locate_tiles(grid, "portal")
-            update_gate_state(grid, button_positions, gate_positions, entity_positions)
+            update_gate_state(grid, button_positions, gate_positions, entity_positions, sfx)
         display_text(screen, f"Level {current_level+1}", font, (255,255,255), 10, 10)
         pygame.display.update()
     
