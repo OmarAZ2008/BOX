@@ -30,6 +30,7 @@ sfx = True
 bgm = True
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("BOX")
 
 screen.blit(title_bg, (0,0))
 pygame.display.update()
@@ -63,7 +64,7 @@ try:
 
 except FileNotFoundError:
     sfx = True
-    unlocked_levels = []
+    unlocked_levels = [0]
 
 def save_game():
     save_data = {
