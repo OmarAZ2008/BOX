@@ -268,4 +268,4 @@ while True:
         update_unlocked_levels(unlocked_levels)
         pygame.display.update()
 
-    clock.tick(360)
+    clock.tick(60)
