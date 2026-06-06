@@ -152,7 +152,7 @@ while True:
                         teleport(grid, entities, player, entity_positions, portal_positions, 1, 0, sfx)
                         play_sound(move_sound, sfx)
                 elif event.key == pygame.K_ESCAPE:
-                    grif = copy.deepcopy(grids[current_level])
+                    grid = copy.deepcopy(grids[current_level])
                     entities = copy.deepcopy(level_entities[current_level])
                     player = Entity("player",0,0,(0,0,0))
                     for i in range(len(entities)):
@@ -166,7 +166,7 @@ while True:
                 entity_positions = locate_entities(entities)
                 update_gate_state(grid, button_positions, gate_positions, entity_positions, sfx)
                 if event.key == pygame.K_r:
-                    grif = copy.deepcopy(grids[current_level])
+                    grid = copy.deepcopy(grids[current_level])
                     entities = copy.deepcopy(level_entities[current_level])
                     player = Entity("player",0,0,(0,0,0))
                     for i in range(len(entities)):
